@@ -1,10 +1,18 @@
 //imports dependencias, imagenes, componentes, stylos
 
-import reactLogo from '../images/react.svg'
+
 import '../styles/App.scss'
+import { useState } from 'react'
+
 
 
 function App() {
+  const [numberOfErrors, setnumberOfErrors] = useState(0);
+  const handleClik = (event) => {
+    setnumberOfErrors(numberOfErrors +1);
+    console.log(numberOfErrors);
+
+  }
 
 //funciones, variables, handles, 
  
@@ -14,6 +22,7 @@ function App() {
      <div className="page">
       <header>
         <h1 className="header__title">Juego del ahorcado</h1>
+        <button onClick={handleClik}>Incrementar</button>
       </header>
       <main className="main">
         <section>
@@ -45,16 +54,16 @@ function App() {
           <form className="form">
             <label className="title" htmlFor="last-letter">Escribe una letra:</label>
             <input
-              autocomplete="off"
+              autoComplete="off"
               className="form__input"
-              maxlength="1"
+              maxLength="1"
               type="text"
               name="last-letter"
               id="last-letter"
             />
           </form>
         </section>
-        <section className="dummy error-5">
+        <section className="dummy error-{numbersOfError}">
           <span className="error-13 eye"></span>
           <span className="error-12 eye"></span>
           <span className="error-11 line"></span>
