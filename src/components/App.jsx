@@ -6,19 +6,30 @@ import { useState } from 'react';
 function App() {
   const [numberOfErrors, setnumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
-  const checkRegEx = '[Az]áéíóúü';
+  const  checkRegEx = /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ]+$/;
+
+ 
+
+
+
 
   //funciones, variables, handles,
   const handleClick = () => {
     setnumberOfErrors(numberOfErrors + 1);
   };
   const handleLastLetter = (ev) => {
+    
+
+    console.log(ev.target.value)
+
+    // const inputValue = 
     /* si el caracter escrito no es válido, no se guarda en lastLetter*/
 
-    if(ev.target.value === checkRegEx){
-      console.log('hola');
-      // setLastLetter(ev.target.value);
-    }
+  // checkRegEx.test(lastLetter) ?  setLastLetter(ev.target.value) : null;
+  checkRegEx.test(ev.target.value) ?  setLastLetter(ev.target.value) : false;
+ 
+
+
 
   };
 
