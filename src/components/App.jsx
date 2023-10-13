@@ -6,31 +6,29 @@ import { useState } from 'react';
 function App() {
   const [numberOfErrors, setnumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
-  const  checkRegEx = /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ]+$/;
-
- 
-
-
-
+  const [userLetters, setUserLetters] = useState([]);
+  const [word, setWord] = useState('katakroker');
+  const checkRegEx = /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ]+$/;
 
   //funciones, variables, handles,
   const handleClick = () => {
     setnumberOfErrors(numberOfErrors + 1);
   };
   const handleLastLetter = (ev) => {
-    
+    checkRegEx.test(ev.target.value) ? setLastLetter(ev.target.value) : false;
+    const newUserLetter = ev.target.value;
+    setUserLetters({ ...lastLetter, ...newUserLetter });
+  };
 
-    console.log(ev.target.value)
-
-    // const inputValue = 
-    /* si el caracter escrito no es válido, no se guarda en lastLetter*/
-
-  // checkRegEx.test(lastLetter) ?  setLastLetter(ev.target.value) : null;
-  checkRegEx.test(ev.target.value) ?  setLastLetter(ev.target.value) : false;
- 
-
-
-
+  const renderSolutionLetters = () => {
+    const wordLetters = word.split('');
+    return wordLetters.map((letter, index) => {
+      return (
+        <li key={index} className="letter">
+          {letter}
+        </li>
+      );
+    });
   };
 
   //html
@@ -45,18 +43,7 @@ function App() {
           <section>
             <div className="solution">
               <h2 className="title">Solución:</h2>
-              <ul className="letters">
-                <li className="letter">k</li>
-                <li className="letter">a</li>
-                <li className="letter"></li>
-                <li className="letter">a</li>
-                <li className="letter">k</li>
-                <li className="letter">r</li>
-                <li className="letter"></li>
-                <li className="letter">k</li>
-                <li className="letter">e</li>
-                <li className="letter">r</li>
-              </ul>
+              <ul className="letters">{renderSolutionLetters()}</ul>
             </div>
             <div className="error">
               <h2 className="title">Letras falladas:</h2>
